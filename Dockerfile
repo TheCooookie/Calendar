@@ -8,7 +8,9 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
-RUN yarn install
+RUN yarn install  \
+    && npm install -g serve
+    
 # If you are building your code for production
 # RUN npm ci --only=production
 
@@ -16,4 +18,4 @@ RUN yarn install
 COPY . .
 
 EXPOSE 8080
-CMD [ "node", "index.js" ]
+CMD [ "serve", "-s", "build", "-l", "8080" ]
